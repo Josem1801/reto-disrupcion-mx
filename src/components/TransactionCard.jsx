@@ -4,7 +4,7 @@ import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { GlobalContext } from "../contexts/GlobalContext";
 function CardTransaction({ description, amount, id, month }) {
   const sign = amount > 0 ? "+" : "-";
-
+  console.log(id);
   const color = amount > 0 ? "text-green " : "text-red ";
   const { deleteTransaction } = useContext(GlobalContext);
   const handleDelete = () => {

@@ -20,7 +20,6 @@ function DayContainer({ data, month }) {
   //Variable para saber si se realizaron transacciones el mismo dia
   return (
     <div className="col-10 mx-auto ">
-      {console.log(days)}
       {days.map(({ day: dayTransaction }, dayId) => {
         return (
           <div className="fw-bold row fs-6 mb-2" key={dayId}>
@@ -38,7 +37,7 @@ function DayContainer({ data, month }) {
                   description={title}
                   amount={amount}
                   key={idx}
-                  id={dayId}
+                  id={idx}
                   month={month}
                 />
               ))}

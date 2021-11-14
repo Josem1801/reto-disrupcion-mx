@@ -20,7 +20,7 @@ const transactionReducer = (state, action) => {
           .filter(
             ({ date }) => new Date(date).getMonth() === action.payload.month
           )
-          .filter((_, id) => id !== 0),
+          .filter((_, id) => id !== action.payload.id),
       };
 
     default:

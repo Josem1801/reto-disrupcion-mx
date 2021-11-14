@@ -5,7 +5,7 @@ function ModalAddTransaction({ handleClose }) {
   const { addTransaction, state } = useContext(GlobalContext);
   const titleRef = useRef();
   const amountRef = useRef();
-  console.log();
+
   const handleAddTransaction = () => {
     const amount = amountRef.current.value;
     const title = titleRef.current.value;

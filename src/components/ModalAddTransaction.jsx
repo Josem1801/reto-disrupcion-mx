@@ -2,18 +2,24 @@ import Button from "../components/Button";
 import React, { useContext, useRef } from "react";
 import { GlobalContext } from "../contexts/GlobalContext";
 function ModalAddTransaction({ handleClose }) {
-  const { addTransaction } = useContext(GlobalContext);
+  const { addTransaction, state } = useContext(GlobalContext);
   const titleRef = useRef();
   const amountRef = useRef();
+  console.log();
   const handleAddTransaction = () => {
     const amount = amountRef.current.value;
     const title = titleRef.current.value;
     if (amount.length > 0 && title.length > 0) {
-      addTransaction({
+      const tx = {
         amount: Number(amount),
         title: title,
         date: new Date(Date.now()),
-      });
+      };
+      addTransaction(tx);
+      window.localStorage.setItem(
+        "TRANSACTIONS",
+        JSON.stringify([tx, ...state.transactions])
+      );
       handleClose(false);
     } else {
       alert("Campos no validos");

@@ -1,7 +1,11 @@
 import React, { createContext, useReducer } from "react";
-import initialState from "../utils/data.json";
-const GlobalContext = createContext(initialState);
+import getTransactions from "../utils/getTransactions";
 
+const GlobalContext = createContext();
+const initialState = {
+  id: "1",
+  transactions: getTransactions(),
+};
 const transactionReducer = (state, action) => {
   switch (action.type) {
     case "ADD_TRANSACTION":

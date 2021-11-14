@@ -49,4 +49,4 @@ function DayContainer({ data, month }) {
   );
 }
 
-export default React.memo(DayContainer);
+export default DayContainer;

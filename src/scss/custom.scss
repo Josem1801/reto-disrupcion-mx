@@ -1,0 +1,42 @@
+// Custom.scss
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap");
+$theme-colors: (
+  "primary": rgba(242, 249, 255),
+  "purple": rgba(100, 130, 250),
+  "green": rgb(120, 220, 150),
+  "red": rgb(236, 121, 117),
+);
+$font-size-base: 0.8rem;
+$font-family-base: "PT Sans", sans-serif;
+$font-family-sans-serif: "PT Sans", sans-serif;
+// Option A: Include all of Bootstrap
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+// Then add additional custom code here
+.pointer {
+  cursor: pointer;
+}
+
+.transition {
+  transition: 0.1s;
+}
+
+.delete-card:hover {
+  background: rgb(236, 121, 117);
+  border-color: rgb(236, 121, 117) !important;
+  box-shadow: 0 0 2px 2px rgb(236, 121, 117);
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(122, 122, 122, 0.2);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background: rgba(100, 130, 250, 0.575);
+}

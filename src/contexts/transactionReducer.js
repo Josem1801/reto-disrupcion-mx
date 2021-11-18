@@ -12,7 +12,8 @@ const transactionReducer = (state, action) => {
         transactions: state.transactions
           .filter(({ date }) => new Date(date).getMonth() === payload.month)
           .reverse()
-          .filter((_, idx) => idx !== payload.idx),
+          .filter((_, idx) => idx !== payload.idx)
+          .reverse(),
       };
     case "GET_TRANSACTIONS":
       return {

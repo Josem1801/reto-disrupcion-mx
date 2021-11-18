@@ -18,12 +18,16 @@ const GlobalProvider = ({ children }) => {
       payload: { idx, month },
     });
   }
-  function addTransaction(transaction) {
-    postTransaction(transaction);
-    dispatch({
-      type: "ADD_TRANSACTION",
-      payload: transaction,
-    });
+  async function addTransaction(transaction) {
+    try {
+      const transactionAdded = await postTransaction(transaction);
+      dispatch({
+        type: "ADD_TRANSACTION",
+        payload: transactionAdded,
+      });
+    } catch (err) {
+      console.log("Error: ", err);
+    }
   }
 
   async function getTransactions() {

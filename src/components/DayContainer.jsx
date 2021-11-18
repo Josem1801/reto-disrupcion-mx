@@ -3,8 +3,9 @@ import months from "../utils/months";
 import TransactionCard from "./TransactionCard";
 function DayContainer({ data, month }) {
   //Array modificado para obtener el numero del mes
+
   const days = data
-    .filter(
+    ?.filter(
       ({ date }, idx) =>
         new Date(data[idx - 1]?.date).getDate() !== new Date(date).getDate()
     )
@@ -17,10 +18,10 @@ function DayContainer({ data, month }) {
   let today = new Date(Date.now()).getDate();
   //Se recorta el nombre del mes a las 3 primeras letras
   const monthStr = months[month].substr(0, 3);
-  //Variable para saber si se realizaron transacciones el mismo dia
+
   return (
     <div className="col-10 mx-auto ">
-      {days.map(({ day: dayTransaction }, dayId) => {
+      {days?.reverse().map(({ day: dayTransaction }, dayId) => {
         return (
           <div className="fw-bold row fs-6 mb-2" key={dayId}>
             <span className="p-0 mb-1">
@@ -32,12 +33,14 @@ function DayContainer({ data, month }) {
             {/* Se filtran las transacciones del mismo dia*/}
             {data
               .filter(({ date }) => new Date(date).getDate() === dayTransaction)
-              .map(({ amount, title }, idx) => (
+              .reverse()
+              .map(({ amount, title, id }, idx) => (
                 <TransactionCard
                   description={title}
                   amount={amount}
                   key={idx}
-                  id={idx}
+                  id={id}
+                  idx={idx}
                   month={month}
                 />
               ))}

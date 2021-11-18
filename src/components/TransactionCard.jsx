@@ -1,14 +1,15 @@
 import React, { useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
-import { GlobalContext } from "../contexts/GlobalContext";
-function CardTransaction({ description, amount, id, month }) {
+import GlobalContext from "../contexts/GlobalContext";
+function CardTransaction({ description, amount, id, idx, month }) {
   const sign = amount > 0 ? "+" : "-";
 
   const color = amount > 0 ? "text-green " : "text-red ";
   const { deleteTransaction } = useContext(GlobalContext);
   const handleDelete = () => {
-    deleteTransaction({ month, id });
+    console.log(id, idx, month);
+    deleteTransaction({ month, id, idx });
   };
   return (
     <div className="w-100 bg-white d-flex align-items-center px-2 py-2 rounded mb-2 ">

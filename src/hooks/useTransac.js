@@ -1,29 +1,32 @@
-const useTransaction = (transactions, month) => {
+import { useContext } from "react";
+import GlobalContext from "../contexts/GlobalContext";
+function useTransac(month) {
+  const { transactions } = useContext(GlobalContext);
   if (transactions === undefined) {
     throw new Error("useTransaction must be used within a GlobalProvider");
   }
-
-  const monthTransactions = transactions.filter(
-    ({ date }) => new Date(date).getMonth() === month
-  );
 
   let balance = 0;
   let earningsBalance = 0;
   let expenseBalance = 0;
 
   if (month) {
+    const monthTransaction = transactions
+      .filter(({ date }) => new Date(date).getMonth() === month)
+      .map((transactions) => transactions);
+
     /* Se suma el balance */
-    monthTransactions.map((data) => {
+    monthTransaction.map((data) => {
       balance = balance + data.amount;
     });
     /* Se suma el balance de "Ingresos" */
-    monthTransactions
+    monthTransaction
       .filter((data) => data.amount > 0)
       .map((balance) => {
         earningsBalance += balance.amount;
       });
     /* Se suma el balance de "Gastos" */
-    monthTransactions
+    monthTransaction
       .filter((data) => data.amount < 0)
       .map((balance) => {
         expenseBalance -= balance.amount;
@@ -33,10 +36,9 @@ const useTransaction = (transactions, month) => {
       balance,
       expenseBalance,
       earningsBalance,
-      monthTransactions,
+      monthTransaction,
     };
   }
   return { transactions };
-};
-
-export default useTransaction;
+}
+export default useTransac;

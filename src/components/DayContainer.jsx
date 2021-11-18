@@ -2,18 +2,14 @@ import React from "react";
 import months from "../utils/months";
 import TransactionCard from "./TransactionCard";
 function DayContainer({ data, month }) {
-  //Array modificado para obtener el numero del mes
+  //Se modifica el array para obtener solo los dias
+  let days = data
+    ?.map((data) => new Date(data.date).getDate())
+    .sort((a, b) => a + b); //Se ordena lo numeros de mayor a menor
 
-  const days = data
-    ?.filter(
-      ({ date }, idx) =>
-        new Date(data[idx - 1]?.date).getDate() !== new Date(date).getDate()
-    )
-    .map((tx) => ({
-      amount: tx.amount,
-      title: tx.title,
-      day: new Date(tx.date).getDate(),
-    }));
+  //Se ocupa Set para remover los dias repetidos
+  days = [...new Set(days)];
+
   //Se obtiene el dia de hoy
   let today = new Date(Date.now()).getDate();
   //Se recorta el nombre del mes a las 3 primeras letras
@@ -21,7 +17,8 @@ function DayContainer({ data, month }) {
 
   return (
     <div className="col-10 mx-auto ">
-      {days?.reverse().map(({ day: dayTransaction }, dayId) => {
+      {/* Se mapean lo dias que estan en el array */}
+      {days?.map((dayTransaction, dayId) => {
         return (
           <div className="fw-bold row fs-6 mb-2" key={dayId}>
             <span className="p-0 mb-1">
@@ -30,10 +27,10 @@ function DayContainer({ data, month }) {
                 : dayTransaction === today - 1 && "Ayer - "}{" "}
               {dayTransaction} {monthStr}.
             </span>
-            {/* Se filtran las transacciones del mismo dia*/}
+            {/* Se filtran las transacciones que coincidan con el dia del map anterior*/}
             {data
               .filter(({ date }) => new Date(date).getDate() === dayTransaction)
-              .reverse()
+              .reverse() //Se invierte el array para obtener las transacciones mas recientes
               .map(({ amount, title, id }, idx) => (
                 <TransactionCard
                   description={title}
